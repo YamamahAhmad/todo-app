@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { deleteTask, updateTask, resetEditStatus } from '../../features/tasks/tasksSlice';
+import styles from './TaskItem.module.css';
 
 const TaskItem = ({ task }) => {
     const [isEditing, setIsEditing] = useState(false);
@@ -12,13 +13,7 @@ const TaskItem = ({ task }) => {
     useEffect(() => {
         if (task.isEdited) {
             setIsHighlighted(true);
-
-            const timer = setTimeout(() => {
-                setIsHighlighted(false);
-                dispatch(resetEditStatus(task.id));
-            }, 2000);
-
-            return () => clearTimeout(timer);
+            dispatch(resetEditStatus(task.id));
         }
     }, [task.isEdited, task.id, dispatch]);
 
@@ -33,20 +28,8 @@ const TaskItem = ({ task }) => {
         }
     };
 
-    const taskStyle = {
-        border: '1px solid #ccc',
-        borderRadius: '5px',
-        backgroundColor: isHighlighted ? 'lightgreen' : 'white',
-        padding: '10px',
-        margin: '10px auto',
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        maxWidth: '500px',
-    };
-
     return (
-        <div style={taskStyle}>
+        <div className={`${styles.taskItem} ${isHighlighted ? styles.highlight : ''}`}>
             {isEditing ? (
                 <>
                     <input

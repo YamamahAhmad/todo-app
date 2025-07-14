@@ -1,0 +1,16 @@
+.taskItem {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: white;
+    padding: 10px;
+    margin: 10px auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 500px;
+}
+
+
+.highlight {
+    background-color: lightgreen;
+}
